@@ -2,7 +2,6 @@
 
 ### Воссоздание UNIX функции ls
 
-<!-- **42 FINAL GRADE:** 116/116 ✅ -->
 
 ### Реализованные флаги:
 * `-l, -R, -a, -r, -t, -1`
@@ -152,17 +151,4 @@
 		1. ENOMEM - Недостаточно памяти в системе.
 
 
-<!-- ### Bonus:
-* `-1 : prints all output in one column`
-* ` Dynamic file name and column sizing` -->
-<!--
-### *Highlights*
-* `Use of recursive dynamic data tree population, sorting and printing`
-
-### Resources
-1. `man ls` `man dirent` `man lstat` `man getpwuid`
-2. `http://man.openbsd.org/ls` -->
-
-
-
-# Для изучения `dscl`, `POSIX`
+### Для изучения `dscl`, `POSIX`
