@@ -6,7 +6,7 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/17 19:27:39 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/17 19:35:02 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ t_lst_file				*ls_lst_get_start(t_lst_file *lst);
 t_lst_file				*ls_lst_reverse(t_lst_file *lst);
 void					ls_lst_free(t_lst_file *lst);
 t_lst_file				*ls_lst_swap(t_lst_file *lst);
-
+int						ls_lst_get_length(t_lst_file *lst);
 #endif

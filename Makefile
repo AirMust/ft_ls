@@ -6,7 +6,7 @@
 #    By: slynell <slynell@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/25 14:04:51 by slynell           #+#    #+#              #
-#    Updated: 2020/08/17 19:27:54 by slynell          ###   ########.fr        #
+#    Updated: 2020/08/17 19:35:26 by slynell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC_LST_FILE += ls_lst_free.c
 SRC_LST_FILE += ls_lst_get_start.c
 SRC_LST_FILE += ls_lst_reverse.c
 SRC_LST_FILE += ls_lst_swap.c
+SRC_LST_FILE += ls_lst_get_length.c
 
 SOURCES_LST_FILE = $(addprefix $(SDIR_LST_FILE)/,$(SRC_LST_FILE))
 OBJECTS_LST_FILE = $(addprefix $(ODIR_LST_FILE)/,$(SRC_LST_FILE:.c=.o))
