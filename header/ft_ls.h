@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/17 19:35:02 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/18 01:38:56 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define A_OPT 		4
 # define R_OPT 		8
 # define T_OPT 		16
+# define U_OPT 		32
+# define ONE_OPT	64
+# define G_OPT		128
+
 
 enum					{ERROR, USAGE};
 
@@ -40,7 +44,6 @@ typedef struct			s_ls {
 }						t_ls;
 
 typedef struct			s_lst_file {
-	struct s_lst_file	*parent;
 	struct s_lst_file	*child;
 	struct s_lst_file	*prev;
 	struct s_lst_file	*next;
@@ -71,5 +74,21 @@ t_lst_file				*ls_lst_get_start(t_lst_file *lst);
 t_lst_file				*ls_lst_reverse(t_lst_file *lst);
 void					ls_lst_free(t_lst_file *lst);
 t_lst_file				*ls_lst_swap(t_lst_file *lst);
-int						ls_lst_get_length(t_lst_file *lst);
+int						ls_lst_length(t_lst_file *lst);
+int						ls_lst_sort_by_atime(t_lst_file *lst);
+int						ls_lst_sort_by_mtime(t_lst_file *lst);
+int						ls_lst_sort_by_name(t_lst_file *lst);
+int						ls_lst_is_root(t_lst_file *lst);
+t_lst_file				*ls_lst_sort(t_lst_file *lst, int opt);
+
+/*
+** ========================== FUNCTION FILES ==============================
+*/
+char 					*ls_file_concat_path_dir(char *path_dir, char *file_name);
+char					ls_file_get_type(mode_t st_mode);
+char					*ls_file_get_permision(mode_t st_mode);
+int						ls_file_get_blocks(t_lst_file *file, int opt);
+char					*ls_file_readlink(char *path);
+char					*ls_file_get_xattr(char *path, char *perms);
+
 #endif

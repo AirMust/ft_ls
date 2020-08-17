@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 12:18:39 by ojustine          #+#    #+#             */
-/*   Updated: 2020/07/26 14:24:42 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/18 01:25:17 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,18 @@ enum					e_ptf_assets
 
 # if defined(_POSIX_VERSION) || defined(__unix__) || defined(linux)
 #  define ANSI_ECS_CODES	1
-#  define ANSI_BOLD			"033[01m"
-#  define ANSI_UNDERLINE	"033[04m"
-#  define ANSI_REVERSED		"033[07m"
-#  define ANSI_BACK_RED		"033[41m"
-#  define ANSI_BACK_GRN		"033[42m"
-#  define ANSI_BACK_YEL		"033[43m"
-#  define ANSI_BACK_BLU		"033[44m"
-#  define ANSI_FONT_RED		"033[31m"
-#  define ANSI_FONT_GRN		"033[32m"
-#  define ANSI_FONT_YEL		"033[33m"
-#  define ANSI_FONT_BLU		"033[34m"
-#  define ANSI_RESET		"033[00m"
+#  define ANSI_BOLD			"\033[01m"
+#  define ANSI_UNDERLINE	"\033[04m"
+#  define ANSI_REVERSED		"\033[07m"
+#  define ANSI_BACK_RED		"\033[41m"
+#  define ANSI_BACK_GRN		"\033[42m"
+#  define ANSI_BACK_YEL		"\033[43m"
+#  define ANSI_BACK_BLU		"\033[44m"
+#  define ANSI_FONT_RED		"\033[31m"
+#  define ANSI_FONT_GRN		"\033[32m"
+#  define ANSI_FONT_YEL		"\033[33m"
+#  define ANSI_FONT_BLU		"\033[34m"
+#  define ANSI_RESET		"\033[00m"
 # endif
 
 # ifdef __GNUC__

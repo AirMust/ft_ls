@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_lst_create.c                                    :+:      :+:    :+:   */
+/*   ls_file_get_xattr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/17 23:10:01 by air_must         ###   ########.fr       */
+/*   Created: 2019/07/12 04:24:15 by havi              #+#    #+#             */
+/*   Updated: 2020/08/18 00:52:41 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/ft_ls.h"
+#include "../header/ft_ls.h"
 
-t_lst_file		*ls_lst_create(void)
+char		*ls_file_get_xattr(char *path, char *perms)
 {
-	t_lst_file	*lst;
+	char *tmp;
 
-	if (!(lst = (t_lst_file *)malloc(sizeof(t_lst_file))))
-		ls_error("", ERROR);
-	lst->prev = NULL;
-	lst->child = NULL;
-	lst->path = NULL;
-	lst->name = NULL;
-	lst->next = NULL;
-	return (lst);
+	tmp = perms;
+	perms = listxattr(path, 0, 0, XATTR_NOFOLLOW) > 0 ? \
+	ft_strjoin(tmp, "@") : ft_strjoin(tmp, " ");
+	free(tmp);
+	return (perms);
 }

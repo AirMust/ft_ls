@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_lst_create.c                                    :+:      :+:    :+:   */
+/*   ls_file_get_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/17 23:10:01 by air_must         ###   ########.fr       */
+/*   Created: 2019/07/12 04:24:15 by havi              #+#    #+#             */
+/*   Updated: 2020/08/17 23:54:55 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file		*ls_lst_create(void)
+char		ls_file_get_type(mode_t st_mode)
 {
-	t_lst_file	*lst;
-
-	if (!(lst = (t_lst_file *)malloc(sizeof(t_lst_file))))
-		ls_error("", ERROR);
-	lst->prev = NULL;
-	lst->child = NULL;
-	lst->path = NULL;
-	lst->name = NULL;
-	lst->next = NULL;
-	return (lst);
+	if (S_ISDIR(st_mode))
+		return ('d');
+	else if (S_ISCHR(st_mode))
+		return ('c');
+	else if (S_ISBLK(st_mode))
+		return ('b');
+	else if (S_ISSOCK(st_mode))
+		return ('s');
+	else if (S_ISFIFO(st_mode))
+		return ('p');
+	else if (S_ISLNK(st_mode))
+		return ('l');
+	else
+		return ('-');
 }

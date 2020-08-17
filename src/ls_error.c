@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ls_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 02:06:07 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/17 19:08:26 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/18 01:39:15 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				ls_error(char *s, int error)
 		ft_putstr_fd("ft_ls: illegal option -- ", 2);
 		ft_putchar_fd(*s, 2);
 		ft_putchar_fd('\n', 2);
-		ft_putendl_fd("usage: ft_ls [-alRrt] [file ...]", 2);
+		ft_putendl_fd("usage: ft_ls [-alRrtu1G] [file ...]", 2);
 	}
 	else if (error == ERROR)
 	{

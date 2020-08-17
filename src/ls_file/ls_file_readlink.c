@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_lst_create.c                                    :+:      :+:    :+:   */
+/*   ls_file_readlink.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/17 23:10:01 by air_must         ###   ########.fr       */
+/*   Created: 2019/07/12 02:56:05 by havi              #+#    #+#             */
+/*   Updated: 2020/08/18 00:31:07 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file		*ls_lst_create(void)
+char		*ls_file_readlink(char *path)
 {
-	t_lst_file	*lst;
+	char	buf[128];
+	ssize_t len;
+	ssize_t buffsize;
 
-	if (!(lst = (t_lst_file *)malloc(sizeof(t_lst_file))))
-		ls_error("", ERROR);
-	lst->prev = NULL;
-	lst->child = NULL;
-	lst->path = NULL;
-	lst->name = NULL;
-	lst->next = NULL;
-	return (lst);
+	buffsize = 128;
+	buf[0] = ' ';
+	buf[1] = '-';
+	buf[2] = '>';
+	buf[3] = ' ';
+	if (!(len = readlink(path, &buf[4], (buffsize - 4))))
+		exit(EXIT_FAILURE);
+	buf[len + 4] = '\0';
+	return (ft_strdup(buf));
 }

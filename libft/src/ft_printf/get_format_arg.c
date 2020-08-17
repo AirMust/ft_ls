@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_format_arg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:56:38 by slynell           #+#    #+#             */
-/*   Updated: 2020/07/26 14:21:21 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/18 01:17:39 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../header/libft.h"
 
 static inline void	get_width_n_precision(t_ptf_info *info)
 {

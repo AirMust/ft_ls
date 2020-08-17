@@ -6,7 +6,7 @@
 #    By: air_must <air_must@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/14 11:23:23 by slynell           #+#    #+#              #
-#    Updated: 2020/08/14 02:56:18 by air_must         ###   ########.fr        #
+#    Updated: 2020/08/18 00:16:05 by air_must         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,6 +138,7 @@ SRC_STRING += ft_strsplitfree.c
 SRC_STRING += ft_strstr.c
 SRC_STRING += ft_strsub.c
 SRC_STRING += ft_strtrim.c
+SRC_STRING += ft_strmerge.c
 
 SOURCES_STRING = $(addprefix $(SDIR_STRING)/,$(SRC_STRING))
 OBJECTS_STRING = $(addprefix $(ODIR_STRING)/,$(SRC_STRING:.c=.o))

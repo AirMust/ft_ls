@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_lst_get_length.c                                :+:      :+:    :+:   */
+/*   ft_strmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/17 19:35:03 by slynell          ###   ########.fr       */
+/*   Created: 2019/05/26 17:55:41 by hbhuiyan          #+#    #+#             */
+/*   Updated: 2020/08/18 00:15:37 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/ft_ls.h"
+#include "../../header/libft.h"
 
-int			ls_lst_get_length(t_lst_file *lst)
+char	*ft_strmerge(char *a, char *b)
 {
-	t_lst_file	*temp_lst;
-	int			c;
+	char	*ret;
 
-	c = 1;
-	temp_lst = lst;
-	while (temp_lst->next)
-	{
-		c++;
-		temp_lst = temp_lst->next;
-	}
-	return (c);
+	ret = ft_strjoin(a, b);
+	ft_strdel(&a);
+	ft_strdel(&b);
+	return (ret);
 }
