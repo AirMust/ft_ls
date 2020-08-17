@@ -6,7 +6,7 @@
 #    By: slynell <slynell@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/25 14:04:51 by slynell           #+#    #+#              #
-#    Updated: 2020/08/17 18:59:59 by slynell          ###   ########.fr        #
+#    Updated: 2020/08/17 19:27:54 by slynell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ ODIR = obj
 
 SRCS = main.c
 SRCS += error.c
+SRCS += ls_read.c
+SRCS += ls_print_lst_file.c
+
 
 SOURCES = $(addprefix $(SDIR)/,$(SRCS))
 OBJECTS = $(addprefix $(ODIR)/,$(SRCS:.c=.o))
@@ -52,6 +55,7 @@ SRC_LST_FILE += ls_lst_create.c
 SRC_LST_FILE += ls_lst_free.c
 SRC_LST_FILE += ls_lst_get_start.c
 SRC_LST_FILE += ls_lst_reverse.c
+SRC_LST_FILE += ls_lst_swap.c
 
 SOURCES_LST_FILE = $(addprefix $(SDIR_LST_FILE)/,$(SRC_LST_FILE))
 OBJECTS_LST_FILE = $(addprefix $(ODIR_LST_FILE)/,$(SRC_LST_FILE:.c=.o))

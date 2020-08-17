@@ -1,94 +1,77 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   sort.c                                             :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-// /*   Updated: 2020/08/17 01:21:41 by air_must         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
+/*   Updated: 2020/08/17 19:27:26 by slynell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "../includes/ft_ls.h"
+#include "../header/ft_ls.h"
 
-// t_file		*ls_swap_files(t_file *file)
-// {
-// 	t_file *next;
+t_lst_file		*ls_sort_time(t_lst_file *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->next && \
+	lst->stat.st_mtimespec.tv_sec < lst->next->stat.st_mtimespec.tv_sec)
+		lst = ls_swap_files(lst);
+	else if (lst->next && \
+	lst->stat.st_mtimespec.tv_sec == lst->next->stat.st_mtimespec.tv_sec)
+	{
+		if (lst->next && \
+		lst->stat.st_mtimespec.tv_nsec < lst->next->stat.st_mtimespec.tv_nsec)
+			lst = ls_swap_files(lst);
+	}
+	lst->next = ls_sort_time(lst->next);
+	return (lst);
+}
 
-// 	next = file->next;
-// 	file->next = next->next;
-// 	next->prev = file->prev;
-// 	file->prev = next;
-// 	next->next = file;
-// 	if (file->next)
-// 		file->next->prev = file;
-// 	if (next->prev)
-// 		next->prev->next = next;
-// 	file = file->prev;
-// 	return (file);
-// }
+t_lst_file		*ls_sort_alpha(t_lst_file *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
+		lst = ls_swap_files(lst);
+	lst->next = ls_sort_alpha(lst->next);
+	return (lst);
+}
 
-// t_file		*ls_sort_time(t_file *file)
-// {
-// 	if (!file)
-// 		return (NULL);
-// 	if (file->next && \
-// 	file->stat.st_mtimespec.tv_sec < file->next->stat.st_mtimespec.tv_sec)
-// 		file = ls_swap_files(file);
-// 	else if (file->next && \
-// 	file->stat.st_mtimespec.tv_sec == file->next->stat.st_mtimespec.tv_sec)
-// 	{
-// 		if (file->next && \
-// 		file->stat.st_mtimespec.tv_nsec < file->next->stat.st_mtimespec.tv_nsec)
-// 			file = ls_swap_files(file);
-// 	}
-// 	file->next = ls_sort_time(file->next);
-// 	return (file);
-// }
+t_lst_file		*ls_sort_bubble(t_lst_file *lst, int *flags)
+{
+	int c;
+	int i;
 
-// t_file		*ls_sort_alpha(t_file *file)
-// {
-// 	if (!file)
-// 		return (NULL);
-// 	if (file->next && ft_strcmp(file->name, file->next->name) > 0)
-// 		file = ls_swap_files(file);
-// 	file->next = ls_sort_alpha(file->next);
-// 	return (file);
-// }
+	i = 0;
+	c = ls_file_count(lst);
+	while (i < c)
+	{
+		if (*flags & T_FLAG)
+			lst = ls_sort_time(lst);
+		else
+			lst = ls_sort_alpha(lst);
+		i++;
+	}
+	if (*flags & R_FLAG)
+		lst = ls_reverse_files(lst);
+	return (lst);
+}
 
-// t_file		*ls_sort_bubble(t_file *file, int *flags)
-// {
-// 	int c;
-// 	int i;
+t_lst_file		*ls_sort_files(t_lst_file *lst, int *flags)
+{
+	t_lst_file *tmp;
 
-// 	i = 0;
-// 	c = ls_file_count(file);
-// 	while (i < c)
-// 	{
-// 		if (*flags & T_FLAG)
-// 			file = ls_sort_time(file);
-// 		else
-// 			file = ls_sort_alpha(file);
-// 		i++;
-// 	}
-// 	if (*flags & R_FLAG)
-// 		file = ls_reverse_files(file);
-// 	return (file);
-// }
-
-// t_file		*ls_sort_files(t_file *file, int *flags)
-// {
-// 	t_file *tmp;
-
-// 	file = ls_goto_first_file(file);
-// 	file = ls_sort_bubble(file, flags);
-// 	tmp = file;
-// 	while (tmp)
-// 	{
-// 		if (tmp->child && !is_ls_hidden(tmp->name))
-// 			tmp->child = ls_sort_files(tmp->child, flags);
-// 		tmp = tmp->next;
-// 	}
-// 	return (file);
-// }
+	lst = ls_goto_first_file(lst);
+	lst = ls_sort_bubble(lst, flags);
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->child && !is_ls_hidden(tmp->name))
+			tmp->child = ls_sort_files(tmp->child, flags);
+		tmp = tmp->next;
+	}
+	return (lst);
+}

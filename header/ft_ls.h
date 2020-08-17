@@ -6,7 +6,7 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/17 19:05:47 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/17 19:27:39 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct			s_lst_file {
 }						t_lst_file;
 
 /*
+** ========================== LS FUNCTION ===================================
+*/
+int						ls_read_opt(t_ls *obj, int ac, char **av);
+int						ls_read_lst_file(t_ls *obj, int ac, char **av);
+void					ls_print_child(t_lst_file *lst, t_ls *obj);
+
+/*
 ** ========================== ERROR FUNCTION ===================================
 */
 void					ls_lstat_error(t_lst_file *lst);
@@ -63,5 +70,6 @@ t_lst_file				*ls_lst_add(t_lst_file *lst);
 t_lst_file				*ls_lst_get_start(t_lst_file *lst);
 t_lst_file				*ls_lst_reverse(t_lst_file *lst);
 void					ls_lst_free(t_lst_file *lst);
+t_lst_file				*ls_lst_swap(t_lst_file *lst);
 
 #endif
