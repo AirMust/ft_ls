@@ -73,34 +73,34 @@ int ls_max_namelen(t_lst_file *lst)
 	return ((l * 2) + 1);
 }
 
-void		ls_print_l(t_lst_file *lst, t_ls *obj)
-{
-	char *perms;
-	char *t;
+// void		ls_print_l(t_lst_file *lst, t_ls *obj)
+// {
+// 	char *perms;
+// 	char *t;
 
-	printf("total %d\n", ls_get_total_blocks(lst, obj->opt));
-	while (lst)
-	{
-		if (S_ISLNK(lst->stat.st_mode))
-			lst->name = ft_strmerge(lst->name, ft_readlink(lst->path));
-		if (lst && lst->name[0] == '.' && !(obj->opt & A_OPT))
-			lst = lst->next;
-		else
-		{
-			perms = ls_get_perms(lst->stat.st_mode);
-			perms = ls_check_xattr(lst->path, perms);
-			t = ft_strsub(ctime(&lst->stat.st_mtime), (unsigned int)4, \
-			(size_t)12);
-			printf("%s %3d %-9.9s %-13.13s %6llu %12.12s %-32.*s\n", \
-			perms, lst->stat.st_nlink, getpwuid(lst->stat.st_uid)->pw_name, \
-			getgrgid(lst->stat.st_gid)->gr_name, \
-			lst->stat.st_size, t, (int)ft_strlen(lst->name), lst->name);
-			free(perms);
-			free(t);
-			lst = lst->next;
-		}
-	}
-}
+// 	printf("total %d\n", ls_get_total_blocks(lst, obj->opt));
+// 	while (lst)
+// 	{
+// 		if (S_ISLNK(lst->stat.st_mode))
+// 			lst->name = ft_strmerge(lst->name, ft_readlink(lst->path));
+// 		if (lst && lst->name[0] == '.' && !(obj->opt & A_OPT))
+// 			lst = lst->next;
+// 		else
+// 		{
+// 			perms = ls_get_perms(lst->stat.st_mode);
+// 			perms = ls_check_xattr(lst->path, perms);
+// 			t = ft_strsub(ctime(&lst->stat.st_mtime), (unsigned int)4, \
+// 			(size_t)12);
+// 			printf("%s %3d %-9.9s %-13.13s %6llu %12.12s %-32.*s\n", \
+// 			perms, lst->stat.st_nlink, getpwuid(lst->stat.st_uid)->pw_name, \
+// 			getgrgid(lst->stat.st_gid)->gr_name, \
+// 			lst->stat.st_size, t, (int)ft_strlen(lst->name), lst->name);
+// 			free(perms);
+// 			free(t);
+// 			lst = lst->next;
+// 		}
+// 	}
+// }
 
 
 void ls_print(t_lst_file *lst, t_ls *obj)
@@ -112,8 +112,7 @@ void ls_print(t_lst_file *lst, t_ls *obj)
 
 	ioctl(1, TIOCGWINSZ, &ws);
 	l = ls_max_namelen(lst);
-	col = ws.ws_col / l;
-	// col = (*obj->opt & ONE_FLAG) ? 1 : (ws.ws_col / l);
+	col = 3;
 	while (lst)
 	{
 		i = 0;
@@ -123,12 +122,12 @@ void ls_print(t_lst_file *lst, t_ls *obj)
 				lst = lst->next;
 			else
 			{
-				printf("%-*.*s", l, l, lst->name);
+				ft_printf("%-*.*s", l, l, lst->name);
 				lst = lst->next;
 				i++;
 			}
 		}
-		printf("\n");
+		ft_printf("\n");
 	}
 }
 
@@ -144,7 +143,7 @@ void ls_print_child(t_lst_file *lst, t_ls *obj)
 	{
 		if (lst->child && !(lst->name[0] == '.' && !(obj->opt & A_OPT)))
 		{
-			printf("\n%s:\n", lst->path);
+			ft_printf("\n%s:\n", lst->path);
 			lst->child = ls_lst_get_start(lst->child);
 			ls_print_child(lst->child, obj);
 		}

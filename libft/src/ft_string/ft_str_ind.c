@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_ind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 11:56:47 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/16 15:23:22 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/17 19:07:11 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_str_ind(char *str, int c)
+int	ft_str_ind(char *str, int c)
 {
 	int i;
 
