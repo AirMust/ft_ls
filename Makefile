@@ -6,7 +6,7 @@
 #    By: air_must <air_must@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/25 14:04:51 by slynell           #+#    #+#              #
-#    Updated: 2020/08/23 19:04:46 by air_must         ###   ########.fr        #
+#    Updated: 2020/08/30 18:03:25 by air_must         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = ft_ls
 CC = gcc
 
 FLAGS = -Wall -Werror -Wextra -O2
+# -Wall -Werror -Wextra -O2
 
 # /*
 # ** ========================== HEADER ==============================
@@ -64,6 +65,8 @@ SRC_LST_FILE += ls_lst_is_root.c
 SRC_LST_FILE += ls_lst_sort.c
 SRC_LST_FILE += ls_lst_print_lst.c
 SRC_LST_FILE += ls_lst_insert.c
+SRC_LST_FILE += ls_lst_get_by_ind.c
+SRC_LST_FILE += ls_lst_name_max_length.c
 
 
 

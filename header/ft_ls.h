@@ -6,7 +6,7 @@
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/27 02:31:24 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:05:09 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,15 @@ t_lst_file				*ls_lst_get_start(t_lst_file *lst);
 t_lst_file				*ls_lst_reverse(t_lst_file *lst);
 void					ls_lst_free(t_lst_file *lst);
 t_lst_file				*ls_lst_swap(t_lst_file *lst);
-int						ls_lst_length(t_lst_file *lst);
+int						ls_lst_length(t_lst_file *lst, int is_hidden);
 int						ls_lst_sort_by_atime(t_lst_file *lst);
 int						ls_lst_sort_by_mtime(t_lst_file *lst);
 int						ls_lst_sort_by_name(t_lst_file *lst);
 int						ls_lst_is_root(t_lst_file *lst);
 t_lst_file				*ls_lst_sort(t_lst_file *lst, int opt);
 void					ls_lst_print_lst(t_lst_file *lst, int depth);
+t_lst_file 				*ls_lst_get_by_ind(t_lst_file *lst, int index, int is_hidden);
+size_t					ls_lst_name_max_length(t_lst_file *lst);
 
 
 /*
