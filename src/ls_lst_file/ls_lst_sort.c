@@ -6,7 +6,7 @@
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/18 01:12:59 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/27 02:46:08 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ t_lst_file		*ls_lst_map_sort(t_lst_file *lst, int opt)
 
 	i = -1;
 	while (++i < ls_lst_length(lst))
+	{
 		if(opt & T_OPT && opt & U_OPT)
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_atime);
 		else if(opt & T_OPT)
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_mtime);
 		else
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_name);
+	}
 	if (opt & R_OPT)
 		lst = ls_lst_reverse(lst);
 	return (lst);
@@ -47,7 +49,7 @@ t_lst_file		*ls_lst_sort(t_lst_file *lst, int opt)
 	temp_lst = lst;
 	while (temp_lst)
 	{
-		if (temp_lst->child && ls_lst_is_root(temp_lst))
+		if (temp_lst->child && !ls_lst_is_root(temp_lst))
 			temp_lst->child = ls_lst_sort(temp_lst->child, opt);
 		temp_lst = temp_lst->next;
 	}

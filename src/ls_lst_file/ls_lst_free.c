@@ -3,30 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/17 18:43:24 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/27 02:26:12 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-void		ls_lst_free(t_lst_file *lst)
+void ls_lst_free(t_lst_file *lst)
 {
 	t_lst_file *temp_lst;
-
-	if (lst->prev)
-		lst = ls_lst_get_start(lst);
-	while (lst)
+	if (lst)
 	{
-		temp_lst = lst->next;
-		free(lst->path);
-		free(lst->name);
-		if (lst->child)
-			ls_lst_free(lst->child);
-		free(lst);
-		lst = temp_lst;
+		if (lst->prev)
+			lst = ls_lst_get_start(lst);
+		while (lst)
+		{
+			temp_lst = lst->next;
+			free(lst->path);
+			free(lst->name);
+			free(lst->error);
+			if (lst->child)
+				ls_lst_free(lst->child);
+			free(lst);
+			lst = temp_lst;
+		}
+		lst = NULL;
 	}
-	lst = NULL;
 }

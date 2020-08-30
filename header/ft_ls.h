@@ -6,7 +6,7 @@
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/18 01:38:56 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/27 02:31:24 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct			s_lst_file {
 	struct s_lst_file	*next;
 	char				*path;
 	char				*name;
+	char				*error;
 	struct stat			stat;
 }						t_lst_file;
 
@@ -57,12 +58,11 @@ typedef struct			s_lst_file {
 */
 int						ls_read_opt(t_ls *obj, int ac, char **av);
 int						ls_read_lst_file(t_ls *obj, int ac, char **av);
-void					ls_print_child(t_lst_file *lst, t_ls *obj);
+void					ls_print_child(t_lst_file *lst, t_ls *obj, int is_root, int count);
 
 /*
 ** ========================== ERROR FUNCTION ===================================
 */
-void					ls_lstat_error(t_lst_file *lst);
 int						ls_error(char *s, int error);
 
 /*
@@ -70,6 +70,8 @@ int						ls_error(char *s, int error);
 */
 t_lst_file				*ls_lst_create(void);
 t_lst_file				*ls_lst_add(t_lst_file *lst);
+t_lst_file				*ls_lst_insert(t_lst_file *lst,
+						t_lst_file *child, int is_new, char *path);
 t_lst_file				*ls_lst_get_start(t_lst_file *lst);
 t_lst_file				*ls_lst_reverse(t_lst_file *lst);
 void					ls_lst_free(t_lst_file *lst);
@@ -80,6 +82,8 @@ int						ls_lst_sort_by_mtime(t_lst_file *lst);
 int						ls_lst_sort_by_name(t_lst_file *lst);
 int						ls_lst_is_root(t_lst_file *lst);
 t_lst_file				*ls_lst_sort(t_lst_file *lst, int opt);
+void					ls_lst_print_lst(t_lst_file *lst, int depth);
+
 
 /*
 ** ========================== FUNCTION FILES ==============================

@@ -6,7 +6,7 @@
 #    By: air_must <air_must@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/25 14:04:51 by slynell           #+#    #+#              #
-#    Updated: 2020/08/18 01:13:51 by air_must         ###   ########.fr        #
+#    Updated: 2020/08/23 19:04:46 by air_must         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,8 @@ SRC_LST_FILE += ls_lst_sort_by_mtime.c
 SRC_LST_FILE += ls_lst_sort_by_name.c
 SRC_LST_FILE += ls_lst_is_root.c
 SRC_LST_FILE += ls_lst_sort.c
+SRC_LST_FILE += ls_lst_print_lst.c
+SRC_LST_FILE += ls_lst_insert.c
 
 
 

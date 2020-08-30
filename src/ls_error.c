@@ -6,7 +6,7 @@
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 02:06:07 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/18 01:39:15 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/27 02:21:15 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void			ls_lstat_error(t_lst_file *lst)
 {
 	ls_lst_free(lst);
+	ft_printf("%s %d", lst->name, errno);
 	exit(EXIT_FAILURE);
 }
 
@@ -26,6 +27,7 @@ int				ls_error(char *s, int error)
 		ft_putchar_fd(*s, 2);
 		ft_putchar_fd('\n', 2);
 		ft_putendl_fd("usage: ft_ls [-alRrtu1G] [file ...]", 2);
+		exit(EXIT_FAILURE);
 	}
 	else if (error == ERROR)
 	{
@@ -34,6 +36,7 @@ int				ls_error(char *s, int error)
 		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
 	}
-	exit(EXIT_FAILURE);
+	// if(errno != 13)
+		// exit(EXIT_FAILURE);
 	return (0);
 }

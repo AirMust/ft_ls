@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:34:45 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/03 15:55:06 by slynell          ###   ########.fr       */
+/*   Updated: 2020/08/23 23:40:28 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 ** Status Checks
 */
 # define IS_ALPHA(x) ((x >= 'A' && x <= 'Z') || (x >= 'a' && x <= 'z')) ? 1 : 0
+# define IS_LOWER(x) (x >= 'a' && x <= 'z') ? 1 : 0
+# define IS_UPPER(x) (x >= 'A' && x <= 'Z') ? 1 : 0
 # define IS_DIGIT(x) (x >= '0' && x <= '9') ? 1 : 0
 # define IS_ALNUM(x) (IS_ALPHA(x) || IS_DIGIT(x)) ? 1 : 0
 # define IS_ASCII(x) (x >= 0 && x <= 127) ? 1 : 0

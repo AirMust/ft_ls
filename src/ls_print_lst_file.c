@@ -6,7 +6,7 @@
 /*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/18 01:43:22 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/27 23:17:17 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void ls_print(t_lst_file *lst, t_ls *obj)
 				lst = lst->next;
 			else
 			{
-				ft_printf("%s%-*.*s\033[00m", ls_get_color(lst, obj->opt), l, l, lst->name);
+				ft_printf("%-*.*s", l, l, lst->name);
 				lst = lst->next;
 				i++;
 			}
@@ -102,15 +102,21 @@ void ls_print(t_lst_file *lst, t_ls *obj)
 	}
 }
 
-void ls_print_child(t_lst_file *lst, t_ls *obj)
+void ls_print_child(t_lst_file *lst, t_ls *obj, int is_root, int count)
 {
-	(obj->opt & L_OPT) ? ls_print_l(lst, obj) : ls_print(lst, obj);
+	// ft_strsub(lst->path, 0, ft_strlen(lst->path) -1)
+	if(is_root == 0)
+		(obj->opt & L_OPT) ? ls_print_l(lst, obj) : ls_print(lst, obj);
 	while (lst)
 	{
-		if (lst->child && !(lst->name[0] == '.' && !(obj->opt & A_OPT)))
+		if (lst->child && (!(ls_lst_is_root(lst) && !(obj->opt & A_OPT)) ))
 		{
-			ft_printf("\n%s:\n", lst->path);
-			ls_print_child(lst->child, obj);
+			if(ft_strequ(lst->path, "ft_ls_root_slynell") != 1 && (is_root == 0 || (is_root == 1 && count > 1)))
+				ft_printf("\n%s:\n", lst->path);
+			if(lst->child && ft_strequ(lst->child->error, "Good") == 0)
+				ft_printf("ft_ls: %s: %s\n", lst->child->name, lst->child->error);
+			else
+				ls_print_child(lst->child, obj, ft_strequ(lst->path, "ft_ls_root_slynell"), ls_lst_length(lst->child));
 		}
 		lst = lst->next;
 	}
