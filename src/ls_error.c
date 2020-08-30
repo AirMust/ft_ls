@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 02:06:07 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/27 02:21:15 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:30:04 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ int				ls_error(char *s, int error)
 		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
 	}
-	// if(errno != 13)
-		// exit(EXIT_FAILURE);
 	return (0);
 }

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/27 02:26:12 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:51:27 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-void ls_lst_free(t_lst_file *lst)
+void	ls_lst_free(t_lst_file *lst)
 {
 	t_lst_file *temp_lst;
+
 	if (lst)
 	{
 		if (lst->prev)

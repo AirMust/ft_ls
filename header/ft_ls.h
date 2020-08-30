@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/30 18:05:09 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:45:36 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define ONE_OPT	64
 # define G_OPT		128
 
-
 enum					{ERROR, USAGE};
 
 typedef struct			s_ls {
@@ -58,8 +57,8 @@ typedef struct			s_lst_file {
 */
 int						ls_read_opt(t_ls *obj, int ac, char **av);
 int						ls_read_lst_file(t_ls *obj, int ac, char **av);
-void					ls_print_child(t_lst_file *lst, t_ls *obj, int is_root, int count);
-
+void					ls_print_child(t_lst_file *lst, t_ls *obj,\
+						int is_root, int count);
 /*
 ** ========================== ERROR FUNCTION ===================================
 */
@@ -83,14 +82,15 @@ int						ls_lst_sort_by_name(t_lst_file *lst);
 int						ls_lst_is_root(t_lst_file *lst);
 t_lst_file				*ls_lst_sort(t_lst_file *lst, int opt);
 void					ls_lst_print_lst(t_lst_file *lst, int depth);
-t_lst_file 				*ls_lst_get_by_ind(t_lst_file *lst, int index, int is_hidden);
+t_lst_file				*ls_lst_get_by_ind(t_lst_file *lst, int index,\
+						int is_hidden);
 size_t					ls_lst_name_max_length(t_lst_file *lst);
-
 
 /*
 ** ========================== FUNCTION FILES ==============================
 */
-char 					*ls_file_concat_path_dir(char *path_dir, char *file_name);
+char					*ls_file_concat_path_dir(char *path_dir,\
+						char *file_name);
 char					ls_file_get_type(mode_t st_mode);
 char					*ls_file_get_permision(mode_t st_mode);
 int						ls_file_get_blocks(t_lst_file *file, int opt);

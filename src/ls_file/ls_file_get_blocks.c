@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ls_file_get_blocks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 04:24:15 by havi              #+#    #+#             */
-/*   Updated: 2020/08/18 00:13:04 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:54:25 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-int ls_file_get_blocks(t_lst_file *file, int opt)
+int				ls_file_get_blocks(t_lst_file *file, int opt)
 {
-	t_lst_file *temp_lst;
-	int blocks;
+	t_lst_file	*temp_lst;
+	int			blocks;
 
 	temp_lst = file;
 	blocks = 0;

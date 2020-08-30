@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_file_readlink.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 02:56:05 by havi              #+#    #+#             */
-/*   Updated: 2020/08/18 00:31:07 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:53:49 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char		*ls_file_readlink(char *path)
 {
 	char	buf[128];
-	ssize_t len;
-	ssize_t buffsize;
+	ssize_t	len;
+	ssize_t	buffsize;
 
 	buffsize = 128;
 	buf[0] = ' ';

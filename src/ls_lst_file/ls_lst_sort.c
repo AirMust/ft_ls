@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/30 17:52:22 by air_must         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:49:32 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file		*ls_lst_sort_by(t_lst_file *lst, int(*sort_by)(t_lst_file *))
+t_lst_file		*ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
 {
 	if (!lst)
 		return (NULL);
-	if(sort_by(lst))
+	if (sort_by(lst))
 		lst = ls_lst_swap(lst);
 	lst->next = ls_lst_sort_by(lst->next, sort_by);
 	return (lst);
@@ -29,9 +29,9 @@ t_lst_file		*ls_lst_map_sort(t_lst_file *lst, int opt)
 	i = -1;
 	while (++i < ls_lst_length(lst, 1))
 	{
-		if(opt & T_OPT && opt & U_OPT)
+		if (opt & T_OPT && opt & U_OPT)
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_atime);
-		else if(opt & T_OPT)
+		else if (opt & T_OPT)
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_mtime);
 		else
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_name);
@@ -43,7 +43,8 @@ t_lst_file		*ls_lst_map_sort(t_lst_file *lst, int opt)
 
 t_lst_file		*ls_lst_sort(t_lst_file *lst, int opt)
 {
-	t_lst_file *temp_lst;
+	t_lst_file	*temp_lst;
+
 	lst = ls_lst_get_start(lst);
 	lst = ls_lst_map_sort(lst, opt);
 	temp_lst = lst;
