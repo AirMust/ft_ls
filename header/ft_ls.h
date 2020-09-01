@@ -6,7 +6,7 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/30 18:45:36 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/01 18:57:43 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int						ls_error(char *s, int error);
 /*
 ** ========================== FUNCTION LIST FILES ==============================
 */
-t_lst_file				*ls_lst_create(void);
+t_lst_file				*ls_lst_create(int is_root);
 t_lst_file				*ls_lst_add(t_lst_file *lst);
 t_lst_file				*ls_lst_insert(t_lst_file *lst,
 						t_lst_file *child, int is_new, char *path);

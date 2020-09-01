@@ -6,7 +6,7 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/30 18:29:36 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/01 19:06:16 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void		ls_print_l(t_lst_file *lst, t_ls *obj)
 	{
 		if (S_ISLNK(lst->stat.st_mode))
 			lst->name = ft_strmerge(lst->name, ls_file_readlink(lst->path));
-		if (lst && lst->name[0] == '.' && !(obj->opt & A_OPT))
+		if ((lst && lst->name[0] == '.' && !(obj->opt & A_OPT)))
 			lst = lst->next;
 		else
 		{
 			perms = ls_file_get_permision(lst->stat.st_mode);
 			perms = ls_file_get_xattr(lst->path, perms);
-			t = ft_strsub(ctime(&lst->stat.st_mtime), 4, 12);
-			ft_printf("%s %2d %-9.9s %-5.5s %6llu %12.12s %-32.*s\n",\
-					perms, lst->stat.st_nlink,
-					getpwuid(lst->stat.st_uid)->pw_name,\
-					getgrgid(lst->stat.st_gid)->gr_name,\
-					lst->stat.st_size, t, (int)ft_strlen(lst->name), lst->name);
+			t = ft_strsub(ctime((obj->opt & U_OPT) ? &lst->stat.st_atime :\
+			&lst->stat.st_mtime), 4, 12);
+			ft_printf("%s %2d %-9.9s %-5.5s %10llu %12.12s %-32.*s\n",\
+				perms, lst->stat.st_nlink, getpwuid(lst->stat.st_uid)->pw_name,\
+				getgrgid(lst->stat.st_gid)->gr_name,\
+				lst->stat.st_size, t, (int)ft_strlen(lst->name), lst->name);
 			free(perms);
 			free(t);
 			lst = lst->next;
@@ -59,9 +59,11 @@ void		ls_print(t_lst_file *lst, t_ls *obj)
 
 	l = ls_lst_name_max_length(lst);
 	c_col = (obj->opt & ONE_OPT) ? 1 : (ls_get_col_terminal() / l);
-	c_row = ls_lst_length(lst, obj->opt & A_OPT) / c_col + 1;
+	c_row = (ls_lst_length(lst, obj->opt & A_OPT) % c_col == 0) ?\
+		ls_lst_length(lst, obj->opt & A_OPT) / c_col :\
+		ls_lst_length(lst, obj->opt & A_OPT) / c_col + 1;
 	i = -1;
-	while (++i < c_row)
+	while (++i < c_row && ls_lst_length(lst, obj->opt & A_OPT))
 	{
 		j = -1;
 		while (++j < c_col)
@@ -78,7 +80,8 @@ void		ls_print_child(t_lst_file *lst, t_ls *obj, int is_root, int count)
 		(obj->opt & L_OPT) ? ls_print_l(lst, obj) : ls_print(lst, obj);
 	while (lst)
 	{
-		if (lst->child && (!(ls_lst_is_root(lst) && !(obj->opt & A_OPT))))
+		if (lst->child &&\
+		(!(ls_lst_is_root(lst) && !(obj->opt & A_OPT))))
 		{
 			if (ft_strequ(lst->path, "ft_ls_root_slynell") != 1 &&\
 			(is_root == 0 || (is_root == 1 && count > 1)))

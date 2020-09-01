@@ -6,7 +6,7 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/30 18:52:19 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/01 17:48:28 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ls_lst_length(t_lst_file *lst, int is_hidden)
 	t_lst_file	*temp_lst;
 	int			c;
 
-	c = 1;
+	c = 0;
 	temp_lst = lst;
 	while (temp_lst->next)
 	{

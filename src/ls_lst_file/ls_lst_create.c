@@ -6,13 +6,13 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/30 18:52:41 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/01 18:56:49 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file		*ls_lst_create(void)
+t_lst_file		*ls_lst_create(int is_root)
 {
 	t_lst_file	*lst;
 
@@ -23,5 +23,11 @@ t_lst_file		*ls_lst_create(void)
 	lst->path = NULL;
 	lst->name = NULL;
 	lst->next = NULL;
+	if (is_root)
+	{
+		lst->name = ft_strdup("ft_ls_root_slynell");
+		lst->path = ft_strdup("ft_ls_root_slynell");
+		lst->error = ft_strdup("Good");
+	}
 	return (lst);
 }
