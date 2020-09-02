@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_read.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/01 19:16:40 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/03 00:58:19 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int			ls_read_opt(t_ls *obj, int ac, char **av)
 {
 	while (obj->index < ac && *av[obj->index] == '-')
 	{
+		if (ft_strequ(av[obj->index], "-"))
+			return (1);
 		if (ft_strequ(av[obj->index], "--"))
 		{
 			obj->index += 1;
@@ -23,9 +25,9 @@ int			ls_read_opt(t_ls *obj, int ac, char **av)
 		}
 		while (*(++av[obj->index]))
 		{
-			if (ft_str_ind("lRartu1", *av[obj->index]) == -1)
+			if (ft_str_ind("lRartu1sc", *av[obj->index]) == -1)
 				ls_error(av[obj->index], USAGE);
-			obj->opt |= (1 << ft_str_ind("lRartu1", *av[obj->index]));
+			obj->opt |= (1 << ft_str_ind("lRartu1sc", *av[obj->index]));
 		}
 		obj->index += 1;
 	}
@@ -95,6 +97,7 @@ int			ls_read_lst_file(t_ls *obj, int ac, char **av)
 		root = ls_lst_insert(root, lst, (s++) == 0, av[obj->index - 1]);
 	}
 	main = ls_lst_sort(main, obj->opt);
+	// ls_lst_print_lst(main, 0);
 	ls_print_child(main, obj, 1, 1);
 	ls_lst_free(main);
 	free(obj);

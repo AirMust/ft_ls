@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/30 18:49:32 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/03 00:42:01 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_lst_file		*ls_lst_map_sort(t_lst_file *lst, int opt)
 	i = -1;
 	while (++i < ls_lst_length(lst, 1))
 	{
+		if (opt & T_OPT && opt & C_OPT)
+			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_ctime);
 		if (opt & T_OPT && opt & U_OPT)
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_atime);
 		else if (opt & T_OPT)

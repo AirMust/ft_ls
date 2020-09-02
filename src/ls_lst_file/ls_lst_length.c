@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_length.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/09/01 17:48:28 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/02 23:21:25 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			ls_lst_length(t_lst_file *lst, int is_hidden)
 
 	c = 0;
 	temp_lst = lst;
-	while (temp_lst->next)
+	while (temp_lst)
 	{
 		if (!(temp_lst && temp_lst->name[0] == '.' && !is_hidden))
 			c++;

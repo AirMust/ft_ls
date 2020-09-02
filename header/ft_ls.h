@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/01 18:57:43 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/03 00:41:38 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@
 # define T_OPT 		16
 # define U_OPT 		32
 # define ONE_OPT	64
-# define G_OPT		128
+# define S_OPT		128
+# define C_OPT		256
+
 
 enum					{ERROR, USAGE};
 
@@ -77,6 +79,7 @@ void					ls_lst_free(t_lst_file *lst);
 t_lst_file				*ls_lst_swap(t_lst_file *lst);
 int						ls_lst_length(t_lst_file *lst, int is_hidden);
 int						ls_lst_sort_by_atime(t_lst_file *lst);
+int						ls_lst_sort_by_ctime(t_lst_file *lst);
 int						ls_lst_sort_by_mtime(t_lst_file *lst);
 int						ls_lst_sort_by_name(t_lst_file *lst);
 int						ls_lst_is_root(t_lst_file *lst);
