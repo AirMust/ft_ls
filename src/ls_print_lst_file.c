@@ -3,38 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ls_print_lst_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/03 00:46:03 by air_must         ###   ########.fr       */
+/*   Updated: 2020/09/03 20:10:34 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_ls.h"
 
-void		ls_print_l(t_lst_file *lst, t_ls *obj)
+void		ls_print_l(t_lst_file *lst, t_ls *obj, int flag)
 {
 	char	*perms;
 	char	*t;
-	int		flag;
 
-	flag = 0;
 	while (lst)
 	{
 		if (S_ISLNK(lst->stat.st_mode))
 			lst->name = ft_strmerge(lst->name, ls_file_readlink(lst->path));
-		// if ((lst && lst->name[0] == '.' && !(obj->opt & A_OPT)))
-		// 	lst = lst->next;
 		if (!(lst && lst->name[0] == '.' && !(obj->opt & A_OPT)))
 		{
-			if(flag++ == 0)
+			if (flag++ == 0)
 				printf("total %d\n", ls_file_get_blocks(lst, obj->opt));
 			perms = ls_file_get_permision(lst->stat.st_mode);
 			perms = ls_file_get_xattr(lst->path, perms);
 			t = ft_strsub(ctime((obj->opt & U_OPT) ? &lst->stat.st_atime :\
 			&lst->stat.st_mtime), 4, 12);
-			IF_TRUE(obj->opt & S_OPT,ft_printf("%5llu ", lst->stat.st_blocks));
-			ft_printf("%s %2d %-9.9s %-5.5s %10llu %12.12s %-32.*s\n",\
+			IF_TRUE(obj->opt & S_OPT, ft_printf("%5llu ", lst->stat.st_blocks));
+			ft_printf("%s %2d %-9.9s %-5.9s %9llu %12.12s %-32.*s\n",\
 				perms, lst->stat.st_nlink, getpwuid(lst->stat.st_uid)->pw_name,\
 				getgrgid(lst->stat.st_gid)->gr_name,\
 				lst->stat.st_size, t, (int)ft_strlen(lst->name), lst->name);
@@ -53,31 +49,28 @@ int			ls_get_col_terminal(void)
 	return (ws.ws_col);
 }
 
-void		ls_print(t_lst_file *lst, t_ls *obj)
+void		ls_print(t_lst_file *lst, t_ls *obj, int i, int flag)
 {
 	int				c_col;
-	int				i;
 	int				l;
 	int				c_row;
 	int				j;
-	int				flag;
 
-	flag = 0;
 	l = ls_lst_name_max_length(lst);
 	c_col = (obj->opt & ONE_OPT) ? 1 : (ls_get_col_terminal() / l);
 	c_row = (ls_lst_length(lst, obj->opt & A_OPT) % c_col == 0) ?\
 		ls_lst_length(lst, obj->opt & A_OPT) / c_col :\
 		ls_lst_length(lst, obj->opt & A_OPT) / c_col + 1;
-	i = -1;
 	while (++i < c_row && ls_lst_length(lst, obj->opt & A_OPT))
 	{
 		j = -1;
 		while (++j < c_col)
 			if (i + j * c_row < ls_lst_length(lst, obj->opt & A_OPT))
 			{
-				if(flag++ == 0 && obj->opt & S_OPT)
+				if (flag++ == 0 && obj->opt & S_OPT)
 					printf("total %d\n", ls_file_get_blocks(lst, obj->opt));
-				IF_TRUE(obj->opt & S_OPT,ft_printf("%5llu ", ls_lst_get_by_ind(lst, i + j * c_row, obj->opt & A_OPT)->stat.st_blocks));
+				IF_TRUE(obj->opt & S_OPT, ft_printf("%5llu ",\
+	ls_lst_get_by_ind(lst, i + j * c_row, obj->opt & A_OPT)->stat.st_blocks));
 				ft_printf("%-*.*s", l, l,\
 				ls_lst_get_by_ind(lst, i + j * c_row, obj->opt & A_OPT)->name);
 			}
@@ -88,7 +81,8 @@ void		ls_print(t_lst_file *lst, t_ls *obj)
 void		ls_print_child(t_lst_file *lst, t_ls *obj, int is_root, int count)
 {
 	if (is_root == 0)
-		(obj->opt & L_OPT) ? ls_print_l(lst, obj) : ls_print(lst, obj);
+		(obj->opt & L_OPT) ? ls_print_l(lst, obj, 0) :\
+		ls_print(lst, obj, -1, 0);
 	while (lst)
 	{
 		if (lst->child &&\
