@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_print_lst_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/03 20:10:34 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/09 19:03:38 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ void		ls_print_child(t_lst_file *lst, t_ls *obj, int is_root, int count)
 		ls_print(lst, obj, -1, 0);
 	while (lst)
 	{
-		if (lst->child &&\
-		(!(ls_lst_is_root(lst) && !(obj->opt & A_OPT))))
+		if (lst->child)
 		{
 			if (ft_strequ(lst->path, "ft_ls_root_slynell") != 1 &&\
 			(is_root == 0 || (is_root == 1 && count > 1)))

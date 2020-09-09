@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/09/03 20:05:45 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/09 18:54:48 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_lst_file		*ls_lst_sort(t_lst_file *lst, int opt)
 	temp_lst = lst;
 	while (temp_lst)
 	{
-		if (temp_lst->child && !ls_lst_is_root(temp_lst))
+		if (temp_lst->child)
 			temp_lst->child = ls_lst_sort(temp_lst->child, opt);
 		temp_lst = temp_lst->next;
 	}
