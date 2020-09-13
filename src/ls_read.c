@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ls_read.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/13 09:52:05 by air_must         ###   ########.fr       */
+/*   Updated: 2020/09/13 15:51:30 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_ls.h"
 
-int ls_read_opt(t_ls *obj, int ac, char **av)
+int			ls_read_opt(t_ls *obj, int ac, char **av)
 {
 	while (obj->index < ac && *av[obj->index] == '-')
 	{
@@ -34,7 +34,7 @@ int ls_read_opt(t_ls *obj, int ac, char **av)
 	return (1);
 }
 
-t_lst_file *pre_error(char *path_dir, char *name, t_lst_file *lst)
+t_lst_file	*pre_error(char *path_dir, char *name, t_lst_file *lst)
 {
 	ls_lst_free(lst);
 	lst = ls_lst_create(0);
@@ -58,43 +58,42 @@ t_lst_file *pre_error(char *path_dir, char *name, t_lst_file *lst)
 	return (lst);
 }
 
-t_lst_file *ls_read_file(char *path_dir, char *name,
-						 t_lst_file *lst, t_ls *x)
+t_lst_file	*ls_read_f(char *path_dir, char *name,\
+			t_lst_file *lst, int x)
 {
-	DIR *dir;
-	struct dirent *entry;
+	DIR				*dir;
+	struct dirent	*te;
 
 	if ((dir = opendir(path_dir)) == NULL)
 		lst = pre_error(path_dir, name, lst);
 	else
 	{
-		while ((entry = readdir(dir)) != NULL)
+		while ((te = readdir(dir)) != NULL)
 		{
-			if ((entry->d_name[0] == '.' && x->opt & A_OPT) || entry->d_name[0] != '.')
+			if ((te->d_name[0] == '.' && x & A_OPT) || te->d_name[0] != '.')
 			{
 				lst = (lst) ? ls_lst_add(lst) : ls_lst_create(0);
-				lst->name = ft_strdup(entry->d_name);
+				lst->name = ft_strdup(te->d_name);
 				lst->path = ls_file_concat_path_dir(path_dir, lst->name);
 				lst->error = 0;
 				if (!(lstat(lst->path, &lst->stat) == 0))
 					lst = pre_error(path_dir, name, lst);
-				if (S_ISDIR(lst->stat.st_mode) && !ls_lst_is_root(lst) &&
-					x->opt & RR_OPT)
-					lst->child = ls_read_file(lst->path, lst->name, lst->child, x);
+				if (S_ISDIR(lst->stat.st_mode) && !ls_root(lst) &&
+					x & RR_OPT)
+					lst->child = ls_read_f(lst->path, lst->name, lst->child, x);
 			}
 		}
 		closedir(dir);
 	}
-
 	return (lst);
 }
 
-int ls_read_lst_file(t_ls *obj, int ac, char **av)
+int			ls_read_lst_file(t_ls *obj, int ac, char **av)
 {
-	t_lst_file *lst;
-	t_lst_file *root;
-	t_lst_file *main;
-	int s;
+	t_lst_file	*lst;
+	t_lst_file	*root;
+	t_lst_file	*main;
+	int			s;
 
 	s = 0;
 	main = ls_lst_create(1);
@@ -102,42 +101,17 @@ int ls_read_lst_file(t_ls *obj, int ac, char **av)
 	ac += (av[obj->index]) ? 0 : 1;
 	if (!av[obj->index])
 		av[obj->index] = ft_strdup(".");
-	while (obj->index < ac)
+	while ((obj->index++) < ac)
 	{
-		lst = NULL;
-		obj->index += 1;
-
-		lst = (lst) ? ls_lst_add(lst) : ls_lst_create(0);
+		lst = ls_lst_create(0);
 		lst->name = ft_strdup(av[obj->index - 1]);
 		lst->path = ft_strdup(av[obj->index - 1]);
-		lst->error = 0;
 		if (!(lstat(lst->path, &lst->stat) == 0))
 			lst = pre_error(av[obj->index - 1], NULL, lst);
-
-		if (lst)
-		{
-			if(S_ISDIR(lst->stat.st_mode))
-				lst->child = ls_read_file(lst->name, NULL, NULL, obj);
-			if ((s++) == 0)
-			{
-				root->child = lst;
-				root = root->child;
-			}
-			else
-			{
-				lst->prev = root;
-				root->next = lst;
-				root = root->next;
-			}
-		}
-
+		root = ls_lst_insert(root, lst, &s, obj->opt);
 	}
 	main = ls_lst_sort(main, obj->opt);
-	ls_print_child(main->child, obj, 1);
-//
-	// ls_lst_print_lst(main, 0);
-
-	// main = ls_lst_sort(main, obj->opt);
+	ls_print_child(main->child, obj->opt, 1, ls_lst_length(main->child, 1));
 	ls_lst_free(main);
 	free(obj);
 	return (0);

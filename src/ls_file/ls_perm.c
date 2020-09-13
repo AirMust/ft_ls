@@ -6,13 +6,13 @@
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/08/30 18:53:51 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/13 15:40:01 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-char		*ls_file_get_permision(mode_t st_mode)
+char		*ls_perm(mode_t st_mode)
 {
 	char	*temp;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: air_must <air_must@student.42.fr>          +#+  +:+       +#+         #
+#    By: slynell <slynell@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/25 14:04:51 by slynell           #+#    #+#              #
-#    Updated: 2020/09/03 00:41:31 by air_must         ###   ########.fr        #
+#    Updated: 2020/09/13 15:41:34 by slynell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ SRC_LST_FILE += ls_lst_is_root.c
 SRC_LST_FILE += ls_lst_sort.c
 SRC_LST_FILE += ls_lst_print_lst.c
 SRC_LST_FILE += ls_lst_insert.c
-SRC_LST_FILE += ls_lst_get_by_ind.c
+SRC_LST_FILE += ls_lst_ind.c
 SRC_LST_FILE += ls_lst_name_max_length.c
 
 
@@ -82,10 +82,10 @@ ODIR_FILE = obj/ls_file
 
 SRC_FILE = ls_file_concat_path_dir.c
 SRC_FILE += ls_file_get_type.c
-SRC_FILE += ls_file_get_permision.c
-SRC_FILE += ls_file_get_blocks.c
+SRC_FILE += ls_perm.c
+SRC_FILE += ls_blocks.c
 SRC_FILE += ls_file_readlink.c
-SRC_FILE += ls_file_get_xattr.c
+SRC_FILE += ls_xattr.c
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/12 00:39:48 by air_must         ###   ########.fr       */
+/*   Updated: 2020/09/13 16:10:19 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ typedef struct			s_lst_file {
 */
 int						ls_read_opt(t_ls *obj, int ac, char **av);
 int						ls_read_lst_file(t_ls *obj, int ac, char **av);
-void					ls_print_child(t_lst_file *lst, t_ls *obj,\
-						int count);
+t_lst_file				*ls_read_f(char *path_dir, char *name,\
+						t_lst_file *lst, int x);
+void					ls_print_child(t_lst_file *lst, int x,\
+						int is_root, int count);
 /*
 ** ========================== ERROR FUNCTION ===================================
 */
@@ -70,8 +72,8 @@ int						ls_error(char *s, int error);
 */
 t_lst_file				*ls_lst_create(int is_root);
 t_lst_file				*ls_lst_add(t_lst_file *lst);
-t_lst_file				*ls_lst_insert(t_lst_file *lst,
-						t_lst_file *child, int is_new, char *path);
+t_lst_file				*ls_lst_insert(t_lst_file *root,\
+						t_lst_file *lst, int *s, int x);
 t_lst_file				*ls_lst_get_start(t_lst_file *lst);
 t_lst_file				*ls_lst_reverse(t_lst_file *lst);
 void					ls_lst_free(t_lst_file *lst);
@@ -81,10 +83,10 @@ int						ls_lst_sort_by_atime(t_lst_file *lst);
 int						ls_lst_sort_by_ctime(t_lst_file *lst);
 int						ls_lst_sort_by_mtime(t_lst_file *lst);
 int						ls_lst_sort_by_name(t_lst_file *lst);
-int						ls_lst_is_root(t_lst_file *lst);
+int						ls_root(t_lst_file *lst);
 t_lst_file				*ls_lst_sort(t_lst_file *lst, int opt);
 void					ls_lst_print_lst(t_lst_file *lst, int depth);
-t_lst_file				*ls_lst_get_by_ind(t_lst_file *lst, int index,\
+t_lst_file				*ls_lst_ind(t_lst_file *lst, int index,\
 						int is_hidden);
 size_t					ls_lst_name_max_length(t_lst_file *lst);
 
@@ -94,9 +96,9 @@ size_t					ls_lst_name_max_length(t_lst_file *lst);
 char					*ls_file_concat_path_dir(char *path_dir,\
 						char *file_name);
 char					ls_file_get_type(mode_t st_mode);
-char					*ls_file_get_permision(mode_t st_mode);
-int						ls_file_get_blocks(t_lst_file *file, int opt);
+char					*ls_perm(mode_t st_mode);
+int						ls_blocks(t_lst_file *file, int opt);
 char					*ls_file_readlink(char *path);
-char					*ls_file_get_xattr(char *path, char *perms);
+char					*ls_xattr(char *path, char *perms);
 
 #endif

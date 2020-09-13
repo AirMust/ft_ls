@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/09/12 19:01:44 by air_must         ###   ########.fr       */
+/*   Updated: 2020/09/13 15:11:51 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file *ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
+t_lst_file	*ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
 {
 	if (!lst)
 		return (NULL);
@@ -22,7 +22,7 @@ t_lst_file *ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
 	return (lst);
 }
 
-t_lst_file *ls_lst_map_sort(t_lst_file *lst, int opt)
+t_lst_file	*ls_lst_map_sort(t_lst_file *lst, int opt)
 {
 	int i;
 
@@ -43,7 +43,7 @@ t_lst_file *ls_lst_map_sort(t_lst_file *lst, int opt)
 	return (lst);
 }
 
-t_lst_file *ls_lst_sort(t_lst_file *lst, int opt)
+t_lst_file	*ls_lst_sort(t_lst_file *lst, int opt)
 {
 	t_lst_file *temp_lst;
 

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_file_get_xattr.c                                :+:      :+:    :+:   */
+/*   ls_file_get_blocks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 04:24:15 by havi              #+#    #+#             */
-/*   Updated: 2020/08/30 18:53:11 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/13 15:40:05 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_ls.h"
+#include "../../header/ft_ls.h"
 
-char		*ls_file_get_xattr(char *path, char *perms)
+int				ls_blocks(t_lst_file *file, int opt)
 {
-	char *tmp;
+	t_lst_file	*temp_lst;
+	int			blocks;
 
-	tmp = perms;
-	perms = listxattr(path, 0, 0, XATTR_NOFOLLOW) > 0 ? \
-	ft_strjoin(tmp, "@") : ft_strjoin(tmp, " ");
-	free(tmp);
-	return (perms);
+	temp_lst = file;
+	blocks = 0;
+	while (temp_lst)
+	{
+		if ((opt & A_OPT) == 0 && temp_lst->name[0] != '.')
+			blocks += temp_lst->stat.st_blocks;
+		else if (opt & A_OPT)
+			blocks += temp_lst->stat.st_blocks;
+		temp_lst = temp_lst->next;
+	}
+	return (blocks);
 }

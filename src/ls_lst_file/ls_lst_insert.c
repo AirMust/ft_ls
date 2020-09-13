@@ -3,35 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_insert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/09/12 01:22:14 by air_must         ###   ########.fr       */
+/*   Updated: 2020/09/13 15:23:34 by slynell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file		*ls_lst_insert(t_lst_file *lst, t_lst_file *child,\
-				int is_new, char *path)
+t_lst_file		*ls_lst_insert(t_lst_file *root, t_lst_file *lst,\
+				int *s, int x)
 {
-	t_lst_file	*temp;
-
-	temp = ls_lst_create(0);
-	temp->name = ft_strdup(path);
-	temp->path = ft_strdup(path);
-	temp->error = 0;
-	temp->child = child;
-	if (is_new)
+	if (lst)
 	{
-		lst->child = temp;
-		lst = lst->child;
+		if (S_ISDIR(lst->stat.st_mode))
+			lst->child = ls_read_f(lst->name, NULL, NULL, x);
+		if ((*s)++ == 0)
+		{
+			root->child = lst;
+			root = root->child;
+		}
+		else
+		{
+			lst->prev = root;
+			root->next = lst;
+			root = root->next;
+		}
 	}
-	else
-	{
-		temp->prev = lst;
-		lst->next = temp;
-		lst = lst->next;
-	}
-	return (lst);
+	return (root);
 }
