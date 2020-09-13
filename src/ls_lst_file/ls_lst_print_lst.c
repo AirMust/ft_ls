@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_print_lst.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/30 18:51:51 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/12 00:44:52 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ls_lst_print_lst(t_lst_file *lst, int depth)
 			ft_printf("\t");
 		}
 		ft_printf("%s\n", temp->path);
+		// ft_printf("%s %s %d\n", temp->name, temp->path, opendir(temp->path));
 		if (temp->child)
 			ls_lst_print_lst(temp->child, depth + 1);
 		temp = temp->next;

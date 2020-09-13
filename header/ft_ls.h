@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 14:22:06 by slynell           #+#    #+#             */
-/*   Updated: 2020/09/03 20:08:18 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/12 00:39:48 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct			s_lst_file {
 	struct s_lst_file	*next;
 	char				*path;
 	char				*name;
-	char				*error;
+	int					error;
 	struct stat			stat;
 }						t_lst_file;
 
@@ -59,7 +59,7 @@ typedef struct			s_lst_file {
 int						ls_read_opt(t_ls *obj, int ac, char **av);
 int						ls_read_lst_file(t_ls *obj, int ac, char **av);
 void					ls_print_child(t_lst_file *lst, t_ls *obj,\
-						int is_root, int count);
+						int count);
 /*
 ** ========================== ERROR FUNCTION ===================================
 */

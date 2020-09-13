@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_insert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/09/01 18:58:12 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/12 01:22:14 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_lst_file		*ls_lst_insert(t_lst_file *lst, t_lst_file *child,\
 	temp = ls_lst_create(0);
 	temp->name = ft_strdup(path);
 	temp->path = ft_strdup(path);
-	temp->error = ft_strdup("Good");
+	temp->error = 0;
 	temp->child = child;
 	if (is_new)
 	{

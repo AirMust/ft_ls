@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 11:02:27 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/09/09 19:17:33 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/12 19:01:44 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/ft_ls.h"
 
-t_lst_file		*ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
+t_lst_file *ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
 {
 	if (!lst)
 		return (NULL);
@@ -22,12 +22,12 @@ t_lst_file		*ls_lst_sort_by(t_lst_file *lst, int (*sort_by)(t_lst_file *))
 	return (lst);
 }
 
-t_lst_file		*ls_lst_map_sort(t_lst_file *lst, int opt)
+t_lst_file *ls_lst_map_sort(t_lst_file *lst, int opt)
 {
-	int			i;
+	int i;
 
 	i = -1;
-	while (++i < ls_lst_length(lst, 1))
+	while (++i < ls_lst_length(lst, 2))
 	{
 		if (opt & T_OPT && opt & C_OPT)
 			lst = ls_lst_sort_by(lst, &ls_lst_sort_by_ctime);
@@ -43,9 +43,9 @@ t_lst_file		*ls_lst_map_sort(t_lst_file *lst, int opt)
 	return (lst);
 }
 
-t_lst_file		*ls_lst_sort(t_lst_file *lst, int opt)
+t_lst_file *ls_lst_sort(t_lst_file *lst, int opt)
 {
-	t_lst_file	*temp_lst;
+	t_lst_file *temp_lst;
 
 	lst = ls_lst_get_start(lst);
 	lst = ls_lst_map_sort(lst, opt);

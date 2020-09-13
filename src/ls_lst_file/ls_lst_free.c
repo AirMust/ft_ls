@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_lst_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynell <slynell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: air_must <air_must@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 05:17:48 by hbhuiyan          #+#    #+#             */
-/*   Updated: 2020/08/30 18:51:27 by slynell          ###   ########.fr       */
+/*   Updated: 2020/09/12 00:41:49 by air_must         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ls_lst_free(t_lst_file *lst)
 			temp_lst = lst->next;
 			free(lst->path);
 			free(lst->name);
-			free(lst->error);
 			if (lst->child)
 				ls_lst_free(lst->child);
 			free(lst);
